@@ -1,0 +1,83 @@
+<% presenter = UserPresenter.new(@user) %>
+
+<div class="container mb-5">
+    <%= render 'pg_header', presenter.show_page_header %>
+
+    <div class="bg-dark rounded p-4 my-4 text-white">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <p class="h5 m-0">User type</p>
+                <p class="m-0"><%= presenter.auth_tier %></p>
+            </div>
+        </div>
+    </div>
+
+    <% if access_to_user_crud?(@user) %>
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-lg-8">
+            <div class="card mb-4">
+                    <div class="card-header">
+                        More options
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <% if same_user?(@user) %>
+                                <%= link_to random_phrase_btn_text,
+                                                "/toggle-random-message",
+                                                class: 'btn btn-primary me-2',
+                                                method: :post %>
+                            <% end %>
+                            <%= link_to 'Edit information', edit_user_path(@user), class: 'btn btn-warning me-2' %>
+                            <% if show_user_block_btn?(@user) %>
+                                <%= link_to presenter.block_btn_text,
+                                                "/toggle-user-block/#{@user.id}",
+                                                class: 'btn btn-danger me-2',
+                                                method: :post %>
+                            <% end %>
+                            <% if show_end_trial_btn?(@user) %>
+                                <%= link_to 'Remove trial period',
+                                            "/end_trial/#{@user.id}",
+                                            class: 'btn btn-danger',
+                                            method: :delete %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+
+    <% if show_notification_options(@user) && same_user?(@user) %>
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-lg-8">
+            <div class="card mb-4">
+                    <div class="card-header">
+                        Notifications
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <%= link_to notification_board_update_btn_text(@user),
+                                                "/toggle-board-update-emails/#{@user.id}",
+                                                class: 'btn btn-primary me-2',
+                                                method: :post %>
+                            <%= link_to notification_board_delete_btn_text(@user),
+                                                "/toggle-board-delete-emails/#{@user.id}",
+                                                class: 'btn btn-primary me-2',
+                                                method: :post %>
+                            <%= link_to notification_board_create_btn_text(@user),
+                                                "/toggle-board-create-emails/#{@user.id}",
+                                                class: 'btn btn-primary me-2',
+                                                method: :post %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-lg-8">
+           <%= render 'info', user: @user %>
+        </div>
+    </div>
+</div>
