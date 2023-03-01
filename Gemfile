@@ -16,6 +16,8 @@ gem 'pg'
 gem 'will_paginate', '~> 3.3'
 gem 'sidekiq'
 gem 'stripe'
+gem "graphql", "~> 2.0"
+gem 'rack-cors'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
