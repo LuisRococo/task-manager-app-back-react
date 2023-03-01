@@ -1,4 +1,9 @@
 class GraphqlController < ApplicationController
+  skip_before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
+  skip_before_action :block_no_paid_plans_users, only: [:payment_block]
+  skip_before_action :block_trial_expirated_users, only: %i[trial_block plans]
+  skip_before_action :block_entry_to_blocked_users, only: [:user_block]
   # If accessing from outside this domain, nullify the session
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
