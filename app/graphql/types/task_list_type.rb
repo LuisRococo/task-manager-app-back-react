@@ -2,7 +2,7 @@
 
 module Types
   class TaskListType < Types::BaseObject
-    field :id, ID, null: false
+    field :id, Integer, null: false
     field :name, String
     field :color, String
     field :priority, Integer

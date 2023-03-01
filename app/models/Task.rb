@@ -31,4 +31,12 @@ class Task < ApplicationRecord
 
     board.author == user
   end
+
+  def creator_name
+    creator.first_name + " " + creator.last_name
+  end
+
+  def assigned_quantity
+    users.count
+  end
 end

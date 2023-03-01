@@ -2,7 +2,7 @@
 
 module Types
   class BoardType < Types::BaseObject
-    field :id, ID, null: false
+    field :id, Integer, null: false
     field :title, String
     field :author_id, Integer
     field :task_lists, [Types::TaskListType]
