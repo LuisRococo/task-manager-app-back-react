@@ -2,7 +2,7 @@
 
 module Types
   class TaskType < Types::BaseObject
-    field :id, ID, null: false
+    field :id, Integer, null: false
     field :title, String
     field :creator_id, Integer
     field :started_at, GraphQL::Types::ISO8601DateTime
@@ -10,8 +10,13 @@ module Types
     field :doing_time, Integer
     field :justification, String
     field :task_list_id, Integer
+    field :creator_name, String
+    field :assigned_quantity, Integer
+    field :description, String
+    field :task_list, Types::TaskListType
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :completed, Boolean
+    field :points, Integer
   end
 end
