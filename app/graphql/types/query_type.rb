@@ -11,14 +11,14 @@ module Types
     end
 
     field :board, Types::BoardType, null: false do
-      argument :id, ID, required: true
+      argument :id, Integer, required: true
     end
     def board(id:)
       Board.find(id)
     end
 
     field :board_task_lists, [Types::TaskListType], null: false do
-      argument :id, ID, required: true
+      argument :id, Integer, required: true
     end
     def board_task_lists(id:)
       TaskList.where(board_id: id)
