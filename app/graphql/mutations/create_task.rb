@@ -10,6 +10,7 @@ module Mutations
       type Types::TaskType
   
       def resolve(title:, points:, description:, taskListId:)
+        # TODO: Change board manager to current user
         task_list = TaskList.find(taskListId)
         board_manager = task_list.board.author
         Task.create!(title: title, points: points, 
