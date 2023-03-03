@@ -4,6 +4,7 @@ module Types
   class TaskType < Types::BaseObject
     field :id, Integer, null: false
     field :title, String
+    field :order, Integer
     field :creator_id, Integer
     field :started_at, GraphQL::Types::ISO8601DateTime
     field :finished_at, GraphQL::Types::ISO8601DateTime
