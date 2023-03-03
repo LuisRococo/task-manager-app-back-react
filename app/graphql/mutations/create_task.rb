@@ -14,10 +14,12 @@ module Mutations
         task_list = TaskList.find(taskListId)
         board_manager = task_list.board.author
         new_order_position = task_list.tasks.count + 1
-        Task.create!(title: title, points: points, 
+        new_task = Task.new(title: title, points: points, 
                     description: description, task_list_id: taskListId,
                     creator_id: board_manager.id, completed: false, 
                     order: new_order_position)
+        new_task.save!
+        new_task
       end
     end
   end

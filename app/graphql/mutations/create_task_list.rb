@@ -10,12 +10,14 @@ module Mutations
       type Types::TaskListType
   
       def resolve(name:, color:, priority:, board_id:)
-        TaskList.create!(
+        new_list = TaskList.new(
           name: name,
           color: color,
           priority: priority,
           board_id: board_id
         )
+        new_list.save!
+        new_list
       end
     end
   end
