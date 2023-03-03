@@ -13,7 +13,12 @@ module Mutations
         # TODO: Change board manager to current user
         task_list = TaskList.find(taskListId)
         board_manager = task_list.board.author
-        new_order_position = task_list.tasks.count + 1
+        
+        new_order_position = 1
+        if (task_list.tasks.count > 0)
+          new_order_position = task_list.tasks.order(order: :ASC).last.order + 1
+        end
+        
         new_task = Task.new(title: title, points: points, 
                     description: description, task_list_id: taskListId,
                     creator_id: board_manager.id, completed: false, 
