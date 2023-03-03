@@ -5,5 +5,6 @@ module Types
     field :patch_task_list, mutation: Mutations::PatchTaskList
     field :create_task, mutation: Mutations::CreateTask
     field :patch_task, mutation: Mutations::PatchTask
+    field :delete_task, mutation: Mutations::DeleteTask
   end
 end
