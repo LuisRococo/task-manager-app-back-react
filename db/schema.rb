@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_01_214613) do
+ActiveRecord::Schema.define(version: 2023_03_02_225349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 2023_03_01_214613) do
     t.boolean "completed"
     t.integer "points", default: 0
     t.text "description", default: ""
+    t.integer "order", default: 0
     t.index ["creator_id"], name: "index_tasks_on_creator_id"
     t.index ["task_list_id"], name: "index_tasks_on_task_list_id"
   end
