@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
+  skip_before_action :authenticate_user!
   skip_before_action :block_no_paid_plans_users, only: [:payment_block]
   skip_before_action :block_trial_expirated_users, only: %i[trial_block plans]
   skip_before_action :block_entry_to_blocked_users, only: [:user_block]

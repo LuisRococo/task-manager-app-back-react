@@ -1,16 +1,20 @@
 # frozen_string_literal: true
 
-class Users::SessionController < Devise::SessionsController
+class SessionController < Devise::SessionsController
   respond_to :json
 
-  private
-
-  def respond_with(resource, _opts = {})
+  def create
+    self.resource = warden.authenticate!(auth_options)
+    set_flash_message!(:notice, :signed_in)
+    sign_in(resource_name, resource)
+    
     render json: {
       status: {code: 200, message: 'Logged in sucessfully.'},
       data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
     }, status: :ok
   end
+
+  private
 
   def respond_to_on_destroy
     if current_user

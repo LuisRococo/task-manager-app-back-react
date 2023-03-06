@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     sign_in: 'login',
     sign_out: 'logout'
   },
-  controllers: { registrations: 'registrations', sessions: 'users/session' }
+  controllers: { registrations: 'registrations', sessions: 'session' }
   resources :users, only: %i[show edit update] do
     resources :teams, only: %i[new create index]
     resources :boards, shallow: true
