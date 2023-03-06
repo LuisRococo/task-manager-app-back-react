@@ -6,5 +6,6 @@ module Types
     field :create_task, mutation: Mutations::CreateTask
     field :patch_task, mutation: Mutations::PatchTask
     field :delete_task, mutation: Mutations::DeleteTask
+    field :patch_board, mutation: Mutations::PatchBoard
   end
 end
