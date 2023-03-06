@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :block_entry_to_blocked_users, unless: :devise_controller?
 
   helper_method :board_index_path, :access_to_user_crud?
+  protect_from_forgery with: :null_session
 
   protected
 

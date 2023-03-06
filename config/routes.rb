@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get '/current_user', to: 'current_user#index'
   post "/graphql", to: "graphql#execute"
-  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_for :users, path: '', path_names: {
+    sign_in: 'login',
+    sign_out: 'logout'
+  },
+  controllers: { registrations: 'registrations', sessions: 'session' }
   resources :users, only: %i[show edit update] do
     resources :teams, only: %i[new create index]
     resources :boards, shallow: true
