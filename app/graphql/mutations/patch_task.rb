@@ -13,6 +13,17 @@ module Mutations
       type Types::TaskType
   
       def resolve(id:, title:, description:, points:, taskListId:, order:, completed:)
+        if taskListId
+          target_list = TaskList.find(taskListId)
+          if target_list
+            if target_list.tasks.count > 0
+              order = target_list.tasks.order(order: :ASC).last.order + 1
+            else
+              order = 1
+            end
+          end
+        end
+
         task_to_update = Task.find(id)
         task_to_update.title = title if title
         task_to_update.description = description if description

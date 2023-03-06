@@ -74,16 +74,17 @@ if Rails.env.development?
   User.all.where.not(authorization_tier: 'user').each do |manager|
     manager.boards.each do |board|
       board.task_lists.where(priority: 1).each do |task_list|
-        task_list.tasks << Task.new(title: 'Alpha feature', creator: manager)
-        task_list.tasks << Task.new(title: 'Beta feature', creator: manager)
-        task_list.tasks << Task.new(title: 'Omega feature', creator: manager)
-        task_list.tasks << Task.new(title: 'Keter feature', creator: manager)
+        task_list.tasks << Task.new(title: 'Alpha feature', creator: manager, order: 1)
+        task_list.tasks << Task.new(title: 'Beta feature', creator: manager, order: 2)
+        task_list.tasks << Task.new(title: 'Omega feature', creator: manager, order: 3)
+        task_list.tasks << Task.new(title: 'Keter feature', creator: manager, order: 4)
       end
 
       board.task_lists.where(priority: 4).each do |task_list|
         task_list.tasks << Task.new(title: 'Completed I',
                                     creator: manager,
                                     completed: true,
+                                    order: 1,
                                     justification: 'Lorem ipsum lom remson',
                                     doing_time: 24.hours.to_i,
                                     started_at: Time.zone.now - 1.day,
@@ -91,6 +92,7 @@ if Rails.env.development?
         task_list.tasks << Task.new(title: 'Completed II',
                                     creator: manager,
                                     completed: true,
+                                    order: 2,
                                     justification: 'Lorem ipsum lom remson',
                                     doing_time: 24.hours.to_i,
                                     started_at: Time.zone.now - 1.day,
