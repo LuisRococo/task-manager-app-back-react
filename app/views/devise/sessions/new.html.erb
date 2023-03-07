@@ -13,7 +13,7 @@
 
         <div class="form-group mb-3">
           <%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+          <%= f.password_field :password, autocomplete: "current-password", class: 'form-control'%>
         </div>
 
         <% if devise_mapping.rememberable? %>
@@ -24,7 +24,7 @@
         <% end %>
 
         <div class="d-flex justify-content-end mt-5">
-          <%= f.submit "Log in", class: 'btn btn-success' %>
+          <button class="btn btn-primary" onclick="login()" type="button">Log in</button>
         </div>
       <% end %>
 
@@ -33,3 +33,34 @@
   </div>
 
 </div>
+
+<script>
+  const boardPage = "http://localhost:5173"
+
+  async function login() {
+    const email = document.getElementById("user_email").value;
+    const password = document.getElementById("user_password").value;
+
+    const response = await fetch("/login",{
+      method: "POST",
+       headers: {
+        "Content-Type": "application/json",
+        "credentials": 'include'
+      },
+      body: JSON.stringify({
+        user: {
+          email: email,
+          password: password
+        }
+      })
+    });
+
+    if (response.status !== 200) {
+      alert("Wrong credentials");
+      return;
+    }
+
+    const authHeader = response.headers.get("Authorization");
+    location.href = `${boardPage}?token=${authHeader}`;
+  }
+</script>
