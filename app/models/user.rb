@@ -34,6 +34,14 @@ class User < ApplicationRecord
   validates :first_name, length: { minimum: 4, maximum: 25 }
   validates :last_name, length: { minimum: 4, maximum: 25 }
 
+  def user_boards
+    if self.authorization_tier == 'admin' || self.authorization_tier == 'manager'
+      self.boards
+    else
+      self.manager.boards
+    end
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

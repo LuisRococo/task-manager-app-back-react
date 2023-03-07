@@ -23,5 +23,13 @@ module Types
     def board_task_lists(id:)
       TaskList.where(board_id: id)
     end
+
+    field :user_boards, [Types::BoardType], null: false do
+      argument :id, Integer, required: true
+    end
+    def user_boards(id:)
+      user = User.find(id)
+      user.user_boards
+    end
   end
 end
