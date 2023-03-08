@@ -7,5 +7,6 @@ module Types
     field :patch_task, mutation: Mutations::PatchTask
     field :delete_task, mutation: Mutations::DeleteTask
     field :patch_board, mutation: Mutations::PatchBoard
+    field :patch_user, mutation: Mutations::PatchUser
   end
 end
